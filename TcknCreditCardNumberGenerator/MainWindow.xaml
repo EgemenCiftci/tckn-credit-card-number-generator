@@ -1,0 +1,44 @@
+﻿<Window x:Class="TcknCreditCardNumberGenerator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Tckn &amp; Credit Card Number Generator" Height="298" Width="350" Loaded="Window_Loaded" DataContext="{Binding RelativeSource={RelativeSource Self}}" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Window.Background>
+        <ImageBrush ImageSource="/TcknCreditCardNumberGenerator;component/Images/grass.jpg" />
+    </Window.Background>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="11*" />
+            <ColumnDefinition Width="16*" />
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.ColumnSpan="100" Margin="10" Text="Select a number to copy to the clipboard." TextWrapping="Wrap" FontWeight="Bold" Foreground="Red" />
+        <GroupBox Grid.Row="1" Header="TCKNs" Margin="5" Foreground="OrangeRed" FontWeight="Bold">
+            <Grid>
+                <ListBox Name="lbxTckns" SelectionChanged="lbxTckns_SelectionChanged" />
+            </Grid>
+        </GroupBox>
+        <GroupBox Grid.Row="1" Grid.Column="1" Header="Credit Card Numbers" Margin="5" Foreground="OrangeRed" FontWeight="Bold">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="BIN:" VerticalAlignment="Center" />
+                <TextBox Grid.Column="1" Text="{Binding Path=bin, UpdateSourceTrigger=PropertyChanged}" MaxLength="6" Margin="5,5,0,5" />
+                <ListBox Grid.Row="1" Grid.ColumnSpan="100" Name="lbxCreditCardNumbers" SelectionChanged="lbxCreditCardNumbers_SelectionChanged" />
+            </Grid>
+        </GroupBox>
+        <Button Grid.Row="100" Grid.ColumnSpan="100" Content="GENERATE" Height="50" Name="btnGenerate" Click="btnGenerate_Click" IsDefault="True" FontWeight="Bold"/>
+        <Grid Name="grdBusy" Grid.ColumnSpan="100" Grid.RowSpan="100" Background="White" Opacity="0.7" Visibility="Hidden" />
+        <ProgressBar Grid.ColumnSpan="100" Grid.RowSpan="100" IsIndeterminate="True" Height="23" VerticalAlignment="Center" Name="pbrBusy" Visibility="Hidden" />
+        <TextBlock Grid.ColumnSpan="100" Grid.RowSpan="100" Name="tbkBusy" Text="Generating..." VerticalAlignment="Center" Visibility="Hidden" TextAlignment="Center" />
+    </Grid>
+</Window>
